@@ -7,6 +7,15 @@
   pointer-events: none;
 }
 
+.navbar-custom {
+  background-color: black;
+}
+.navbar-custom .navbar-brand {
+  color: white
+} .navbar-custom .text {
+  color: white
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
