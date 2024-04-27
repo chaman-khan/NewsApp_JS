@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 export class NewsArticle extends Component {
   render() {
-    let { title, description, imageUrl, newsUrl, source } = this.props;
+    let { title, description, imageUrl, newsUrl, source, publishedAt } =
+      this.props;
     return (
-      <div className="card my-3" style={{ width: "18rem" }}>
+      <div className="card my-3">
         <img
           src={
             imageUrl
@@ -17,6 +18,9 @@ export class NewsArticle extends Component {
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
+          <p className="card-text">
+            <small className="text-muted">Published on {publishedAt}</small>
+          </p>
           <a
             rel="noreferrer"
             href={newsUrl}

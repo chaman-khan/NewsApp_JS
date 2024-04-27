@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import NewsArticle from "./NewsArticle";
 import Spinner from "./spinner";
+import PropTypes from "prop-types";
 
 export class News extends Component {
+  static defaultProps = {
+    country: "us",
+    pageSize: 8,
+    category: "general",
+  };
+  static propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+    category: PropTypes.string,
+  };
+
   constructor() {
     super();
     this.state = {
@@ -13,7 +25,7 @@ export class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=22eae0a38f0c4947a718e22def471d2e&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=22eae0a38f0c4947a718e22def471d2e&page=1&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -25,7 +37,11 @@ export class News extends Component {
   }
 
   handleNext = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=22eae0a38f0c4947a718e22def471d2e&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=22eae0a38f0c4947a718e22def471d2e&page=${
       this.state.page + 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
@@ -38,7 +54,11 @@ export class News extends Component {
     });
   };
   handlePrev = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=22eae0a38f0c4947a718e22def471d2e&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=22eae0a38f0c4947a718e22def471d2e&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
@@ -67,6 +87,7 @@ export class News extends Component {
                   imageUrl={item.urlToImage}
                   newsUrl={item.url}
                   source={item.source}
+                  publishedAt={item.publishedAt}
                 />
               </div>
             );
