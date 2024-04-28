@@ -16,10 +16,20 @@ export class NewsArticle extends Component {
           alt={source.name}
         />
         <div className="card-body">
-          <h5 className="card-title">{title}</h5>
+          <h5 className="card-title">
+            {title}
+            <span
+              className="position-absolute top-0 translate-middle badge rounded-pill bg-danger "
+              style={{ left: "90%", zIndex: 1, fontSize: 11 }}
+            >
+              {source.name}
+            </span>
+          </h5>
           <p className="card-text">{description}</p>
           <p className="card-text">
-            <small className="text-muted">Published on {publishedAt}</small>
+            <small className="text-muted">
+              Published on {new Date(publishedAt).toUTCString()})
+            </small>
           </p>
           <a
             rel="noreferrer"
